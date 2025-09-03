@@ -5,20 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ph Tube online</title>
+    <link rel="shortcut icon" href="assets/Logo.png" type="image/x-icon">
 
     <!-- daisyui cdm -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- customs css -->
-     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body>
-
+<body class="w-11/12 mx-auto">
+    <!-- header section -->
+    <header>
+        <nav class="flex flex-col md:flex-row justify-between items-center p-4 border-b">
+            <div class="logo w-[100px]">
+                <img src="assets/Logo.png">
+            </div>
+            <!-- search bar -->
+            <div>
+                <label class="input">
+                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" required placeholder="Search" />
+                </label>
+            </div>
+            <div>
+                <button class="btn">sorts</button>
+            </div>
+        </nav>
+    </header>
 
     <!-- script -->
-     <script src="scripts/script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
