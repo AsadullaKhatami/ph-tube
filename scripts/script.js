@@ -1,12 +1,15 @@
 // console.log("hello !");
 
 // time function
-function getTime(time){
+function getTime(time) {
     const hours = parseInt(time / 3600);
     let remainHours = time % 3600;
     const minute = parseInt(remainHours / 60);
     return `${hours} hr ${minute} min`;
 }
+
+// category into parts
+
 
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
@@ -32,6 +35,22 @@ const displayCategories = (data) => {
         button.classList.add('btn');
         button.innerText = categories.category;
 
+        button.onclick = (event) => {
+            console.log(categories.category_id);
+            fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${categories.category_id}`)
+                .then(res => res.json())
+                .then(data => displayVideo(data.category))
+                .catch(err => console.error(err));
+
+            // remove al active btn 
+            // console.log(categoriesBtn.children);
+            for(let category of categoriesBtn.children){
+                category.classList.remove('active');
+            }
+            // btn active 
+            event.target.classList.add('active');
+        }
+
         categoriesBtn.append(button);
     }
 }
@@ -39,8 +58,26 @@ const displayCategories = (data) => {
 // display video
 const displayVideo = (data) => {
     const videoSection = document.getElementById('video');
+    videoSection.innerHTML = "";
+
+    // when category is empty
+    if (data.length === 0) {
+        videoSection.classList.remove('grid');
+        const div = document.createElement('div');
+        div.classList = "flex justify-center items-center flex-col min-h-screen w-full";
+        div.innerHTML = `
+            <img src="assets/Icon.png"/>
+            <p class="text-center font-bold text-xl">opps! sorry there is no content here.</p>
+        `;
+        videoSection.append(div);
+
+        return 0;
+    } else {
+        videoSection.classList.add('grid');
+    }
+
     for (let video of data) {
-        console.log(video);
+        // console.log(video);
 
         const div = document.createElement('div');
         div.innerHTML = `
