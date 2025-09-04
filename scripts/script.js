@@ -1,5 +1,13 @@
 // console.log("hello !");
 
+// time function
+function getTime(time){
+    const hours = parseInt(time / 3600);
+    let remainHours = time % 3600;
+    const minute = parseInt(remainHours / 60);
+    return `${hours} hr ${minute} min`;
+}
+
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
         .then(response => response.json())
@@ -32,14 +40,15 @@ const displayCategories = (data) => {
 const displayVideo = (data) => {
     const videoSection = document.getElementById('video');
     for (let video of data) {
-        console.log(video.authors[0].verified);
+        console.log(video);
 
         const div = document.createElement('div');
         div.innerHTML = `
-             <figure class="h-[200px]">
+             <figure class="h-[200px] relative">
                 <img class="h-full w-full object-cover"
                 src="${video.thumbnail}"
                 alt="Shoes" />
+                ${video.others.posted_date === "" ? "" : `<p class="absolute bottom-2 right-2 bg-black text-white p-2 rounded-lg">${getTime(video.others.posted_date)}</p>`}
             </figure>
             <div class="card-body">
                 <div class="flex gap-4 py-2">
