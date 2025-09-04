@@ -8,8 +8,23 @@ function getTime(time) {
     return `${hours} hr ${minute} min`;
 }
 
-// category into parts
+// open modal
+async function OpenDetailsModal(id) {
+    const modalBox = document.getElementById('modal-box');
+    const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${id}`);
+    const data = await response.json();
+   modalBox.innerHTML = `
+    <img src="${data.video.thumbnail}"/>
+    <h3 class="text-lg font-bold">${data.video.title}</h3>
+    <p class="py-4">${data.video.description}</p>
+   `;
 
+    detailsModal.showModal();
+
+    
+}
+
+// category into parts
 
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
@@ -44,7 +59,7 @@ const displayCategories = (data) => {
 
             // remove al active btn 
             // console.log(categoriesBtn.children);
-            for(let category of categoriesBtn.children){
+            for (let category of categoriesBtn.children) {
                 category.classList.remove('active');
             }
             // btn active 
@@ -67,7 +82,7 @@ const displayVideo = (data) => {
         div.classList = "flex justify-center items-center flex-col min-h-screen w-full";
         div.innerHTML = `
             <img src="assets/Icon.png"/>
-            <p class="text-center font-bold text-xl">opps! sorry there is no content here.</p>
+            <p class="text-center font-bold text-xl">opp! sorry there is no content here.</p>
         `;
         videoSection.append(div);
 
@@ -80,6 +95,7 @@ const displayVideo = (data) => {
         // console.log(video);
 
         const div = document.createElement('div');
+        
         div.innerHTML = `
              <figure class="h-[200px] relative">
                 <img class="h-full w-full object-cover"
@@ -116,7 +132,13 @@ const displayVideo = (data) => {
         div.classList = "card bg-base-100 shadow-sm";
 
         videoSection.append(div);
+
+        div.addEventListener('click', () => {
+            OpenDetailsModal(video.video_id);
+        });
     }
+
+
 }
 
 loadCategories();

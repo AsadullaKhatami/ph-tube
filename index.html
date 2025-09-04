@@ -42,14 +42,27 @@
     </header>
 
     <!-- categories nav -->
-     <nav id="categories" class="flex justify-center items-center gap-4 py-4">
+    <nav id="categories" class="flex justify-center items-center gap-4 py-4">
 
-     </nav>
+    </nav>
 
-     <!-- main video section -->
-      <main id="video" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- main video section -->
+    <main id="video" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-      </main>
+    </main>
+
+    <!-- modal from daisyui -->
+    <!-- You can open the modal using ID.showModal() method -->
+    <dialog id="detailsModal" class="modal">
+        <div class="modal-box">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <div id="modal-box" class="pt-5 flex flex-col justify-center"
+                
+            </div>
+        </div>
+    </dialog>
 
     <!-- script -->
     <script src="scripts/script.js"></script>
